@@ -1,5 +1,6 @@
 var fs = require("fs");
 var buf = new Buffer.alloc(1024);
+var os = require('os');
 
 console.log("Going to open an existing file");
 fs.open('final.txt', 'r+', function(err, fd) {
@@ -84,5 +85,30 @@ if (fs.existsSync('./New-folder')) {
 }
 
 
+// DNS Module
+var dns = require('dns');
+
+dns.lookup('www.google.com', function onLookup(err, address, family) {
+    console.log('address:', address);
+    dns.reverse(address, function(err, hostnames) {
+        if (err) {
+            console.log(err.stack);
+        }
+
+        console.log('reverse for ' + address + ': ' + JSON.stringify(hostnames));
+    });
+});
+
+
 console.log('File name is ' + __filename);
 console.log('Directory name is ' + __dirname);
+
+
+console.log('Temp Directory ' + os.tmpdir());
+console.log('Returns the endianness of the CPU. Possible values are "BE" or "LE". ' + os.endianness());
+console.log('Operating System User ' + os.hostname());
+console.log('Operating System type ' + os.type());
+console.log('Total Memory ' + os.totalmem());
+console.log('Free Memory ' + os.freemem());
+
+console.log(os.platform());
